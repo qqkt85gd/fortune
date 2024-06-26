@@ -1,10 +1,4 @@
-
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Label } from '@/components/ui/label';
 import { Heart, Star, Share2, Loader2 } from 'lucide-react';
 
 const FortuneGame = () => {
@@ -57,13 +51,13 @@ const FortuneGame = () => {
       </p>
       <p className="text-lg text-center italic mb-4">{result.description}</p>
       <div className="flex justify-center">
-        <Button 
+        <button 
           onClick={handleShare}
           className="flex items-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full shadow-lg"
         >
           <Share2 className="mr-2" size={20} />
           共有する
-        </Button>
+        </button>
       </div>
       {shareMessage && (
         <p className="text-center mt-2 text-green-600 font-semibold">{shareMessage}</p>
@@ -73,33 +67,47 @@ const FortuneGame = () => {
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6">
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-2xl font-bold text-center">生年月日相性占い</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <RadioGroup defaultValue="single" className="mb-4" onValueChange={setMode}>
+      <div className="bg-white shadow-lg rounded-lg p-6">
+        <div className="mb-4">
+          <h2 className="text-2xl font-bold text-center">生年月日相性占い</h2>
+        </div>
+        <div>
+          <div className="mb-4">
             <div className="flex items-center space-x-2">
-              <RadioGroupItem value="single" id="single" />
-              <Label htmlFor="single">わたし</Label>
+              <input
+                type="radio"
+                id="single"
+                name="mode"
+                value="single"
+                checked={mode === 'single'}
+                onChange={() => setMode('single')}
+              />
+              <label htmlFor="single">わたし</label>
             </div>
             <div className="flex items-center space-x-2">
-              <RadioGroupItem value="couple" id="couple" />
-              <Label htmlFor="couple">あなた</Label>
+              <input
+                type="radio"
+                id="couple"
+                name="mode"
+                value="couple"
+                checked={mode === 'couple'}
+                onChange={() => setMode('couple')}
+              />
+              <label htmlFor="couple">あなた</label>
             </div>
-          </RadioGroup>
+          </div>
           
           <div className="space-y-4">
             <div>
               <label htmlFor="birthdate1" className="block text-sm font-medium text-gray-700">
                 {mode === 'single' ? 'わたし' : 'わたし'}の生年月日
               </label>
-              <Input
+              <input
                 type="date"
                 id="birthdate1"
                 value={birthdate1}
                 onChange={(e) => setBirthdate1(e.target.value)}
-                className="mt-1"
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
               />
             </div>
             
@@ -108,17 +116,17 @@ const FortuneGame = () => {
                 <label htmlFor="birthdate2" className="block text-sm font-medium text-gray-700">
                   あなたの生年月日
                 </label>
-                <Input
+                <input
                   type="date"
                   id="birthdate2"
                   value={birthdate2}
                   onChange={(e) => setBirthdate2(e.target.value)}
-                  className="mt-1"
+                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
                 />
               </div>
             )}
             
-            <Button 
+            <button 
               onClick={handleFortuneTelling}
               disabled={isLoading}
               className="w-full bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600 text-white font-bold py-2 px-4 rounded-full shadow-lg"
@@ -131,12 +139,12 @@ const FortuneGame = () => {
               ) : (
                 '占う'
               )}
-            </Button>
+            </button>
           </div>
 
           {result && <ResultDisplay result={result} />}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 };
