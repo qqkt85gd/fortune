@@ -17,3 +17,9 @@
     "lucide-react": "^0.263.1"
   }
 }
+"dependencies": {
+  // ... 他の依存関係
+  "tailwindcss": "^3.3.0",
+  "postcss": "^8.4.21",
+  "autoprefixer": "^10.4.14"
+}
